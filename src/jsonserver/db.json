@@ -1,0 +1,20 @@
+{
+  "users": [
+    {},
+    {
+      "id": "753294",
+      "email": "elgun@gmail.com",
+      "password": "elgun111"
+    },
+    {
+      "id": "346227",
+      "email": "ilkin@mail.ru",
+      "password": "ilkin123"
+    },
+    {
+      "id": "552328",
+      "email": "elcan@mail.ru",
+      "password": "elcan123"
+    }
+  ]
+}

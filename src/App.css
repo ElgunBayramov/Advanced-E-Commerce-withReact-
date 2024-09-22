@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh; /* Ensure it covers at least the full viewport height */
+  min-width: 100vw; /* Ensure it covers the full viewport width */
+}
