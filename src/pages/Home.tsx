@@ -2,7 +2,12 @@ import { Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Carousel from 'react-material-ui-carousel';
+import { useAppDispatch } from '../redux/store';
+import { useEffect } from 'react';
+import { UserType } from '../assets/types/sliceTypes';
+import { setCurrentUser } from '../redux/reducers/appSlice';
 function Home() {
+  const dispatch = useAppDispatch()
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const images = [
@@ -11,6 +16,15 @@ function Home() {
     { url: "https://fastly.picsum.photos/id/185/800/400.jpg?hmac=gVXAxMT2cDEhSwhroZ-RVqLDyRBEv2stx7ocke_X_zc", alt: "City Image" },
     { url: "https://fastly.picsum.photos/id/44/800/400.jpg?hmac=xoTFsXUr0KKkMO8j2kMp6vxnpI3TrCXtSAPH6tZY7AM", alt: "Forest Image" }
   ];
+
+  useEffect(() => {
+    const result = localStorage.getItem("currentUser")
+    if(result){
+      const currentUser: UserType = JSON.parse(result) as UserType
+      dispatch(setCurrentUser(currentUser)); 
+    }
+  }, [])
+  
   return (
       <div style={{display:'flex',flexDirection:'column',minHeight:'100vh'}}>
         {/* Navbar */}

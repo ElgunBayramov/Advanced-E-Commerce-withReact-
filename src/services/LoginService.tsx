@@ -1,10 +1,10 @@
 import { UserType } from "../assets/types/sliceTypes";
 import axios from "./api";
 
-class RegisterService{
-    async AddNewUser(newUser: UserType): Promise<any> {
+class LoginService{
+    async getAllUsers(): Promise<UserType[]> {
         try {
-          const response = await axios.post("/users", newUser);
+          const response = await axios.get("/users");
           return response.data;
         } catch (error) {
           throw error;
@@ -12,4 +12,4 @@ class RegisterService{
       }
 }
 
-export default new RegisterService()
+export default new LoginService()

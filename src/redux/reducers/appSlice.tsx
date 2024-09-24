@@ -24,8 +24,11 @@ export const appSlice = createSlice({
         toggleTheme: (state:AppSliceType) => {
             state.theme = !state.theme
         },
+        setCurrentUser: (state:AppSliceType,action:PayloadAction<UserType>) => {
+            state.currentUser = action.payload
+        }
     }
 })
 
-export const { setLoading,toggleTheme } = appSlice.actions
+export const { setLoading,toggleTheme,setCurrentUser } = appSlice.actions
 export default appSlice.reducer

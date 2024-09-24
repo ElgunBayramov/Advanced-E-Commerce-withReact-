@@ -3,15 +3,15 @@ import { AccountCircle, Lock} from '@mui/icons-material'; // Import visibility i
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { MdVisibility,MdVisibilityOff } from "react-icons/md"
-import { formSchemas } from '../schemas/FormSchemas';
+import { registerFormSchemas } from '../schemas/RegisterFormSchemas';
 import { UserType } from '../assets/types/sliceTypes';
 import registerService from '../services/RegisterService';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
-  const themeforMUI = useTheme();
   const navigate = useNavigate()
+  const themeforMUI = useTheme();
   const isMobile = useMediaQuery(themeforMUI.breakpoints.down('sm'));
   
   const [showPassword, setShowPassword] = useState(false);
@@ -23,7 +23,8 @@ function Register() {
       const payload:UserType = {
         id:String(Math.floor(Math.random()*999999)),
         email:values.email,
-        password:values.password
+        password:values.password,
+        balance:1000
       }
       const response = await registerService.AddNewUser(payload)
       if(response){
@@ -42,7 +43,7 @@ function Register() {
       password: '',
       confirmPassword: '',
     },
-    validationSchema: formSchemas,
+    validationSchema: registerFormSchemas,
     onSubmit: submit,
   });
 
@@ -154,7 +155,7 @@ function Register() {
                 type="submit"
                 sx={{ padding: '8px 0', fontSize: '14px', flex: 1 }}
               >
-                Register
+                Sign Up
               </Button>
               <Button
                 color="success"

@@ -1,6 +1,5 @@
 {
   "users": [
-    {},
     {
       "id": "753294",
       "email": "elgun@gmail.com",
@@ -15,6 +14,18 @@
       "id": "552328",
       "email": "elcan@mail.ru",
       "password": "elcan123"
+    },
+    {
+      "id": "537651",
+      "email": "messi@mail.ru",
+      "password": "messimessi",
+      "balance": 1000
+    },
+    {
+      "id": "826287",
+      "email": "ronaldo@mail.ru",
+      "password": "ronaldo123",
+      "balance": 1000
     }
   ]
 }
