@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import NotFound from "../pages/NotFound";
+import Products from "../pages/Products";
 
 function MainRouter() {
   return (
@@ -12,6 +13,7 @@ function MainRouter() {
       <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/products" element={<Products />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

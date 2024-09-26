@@ -1,0 +1,126 @@
+/* Container for the product card */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 400px; /* Fixed height for uniformity */
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Flex container for image */
+.product-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px; /* Fixed height for image container */
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 100%; /* Ensure it fits within the fixed height */
+    object-fit: contain; /* Ensure the entire image is visible */
+    display: block;
+}
+
+/* Product details styling */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    height: calc(100% - 200px); /* Remaining height for details */
+}
+
+.product-title {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #333;
+    font-weight: bold;
+}
+.details-button {
+    display: flex; /* Flex to align the icon and text */
+    align-items: center; /* Center icon and text vertically */
+    justify-content: center; /* Center icon and text horizontally */
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    color: #fff;
+    background-color: #ff6600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.details-button:hover {
+    background-color: #ff8c1a;
+    transform: translateY(-2px);
+}
+
+/* Optional: Add an icon to the button */
+.details-button::before {
+    content: '\f06e'; /* Unicode for a Font Awesome icon (example: "eye" icon) */
+    font-family: 'FontAwesome'; /* Specify Font Awesome or any other icon font */
+    margin-right: 8px; /* Spacing between icon and text */
+}
+.product-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 10px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.product-price {
+    font-size: 1.1rem;
+    color: #ff6600;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    .product-card {
+        flex-direction: row;
+        max-width: 100%;
+        height: auto; /* Allow height to adjust for mobile */
+    }
+
+    .product-image-wrapper {
+        width: 50%;
+        height: auto; /* Maintain height ratio for smaller screens */
+    }
+
+    .product-details {
+        width: 50%;
+        padding: 10px;
+        height: auto; /* Allow height to adjust for smaller screens */
+    }
+
+    .product-title {
+        font-size: 1rem;
+    }
+
+    .product-description {
+        font-size: 0.8rem;
+    }
+
+    .product-price {
+        font-size: 1rem;
+    }
+}

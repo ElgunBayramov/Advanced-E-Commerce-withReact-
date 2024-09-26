@@ -2,14 +2,19 @@ import { Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Carousel from 'react-material-ui-carousel';
-import { useAppDispatch } from '../redux/store';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 import { useEffect } from 'react';
 import { UserType } from '../assets/types/sliceTypes';
 import { setCurrentUser } from '../redux/reducers/appSlice';
+
 function Home() {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  
+  // Access the current user from the Redux store
+  const currentUser = useAppSelector((state) => state.app.currentUser);
+
   const images = [
     { url: "https://fastly.picsum.photos/id/241/800/400.jpg?hmac=joyUUPqCSjHTHvTHhHGnQ32sBDxnNoPVDlaahFNeQeQ", alt: "Nature Image" },
     { url: "https://fastly.picsum.photos/id/65/800/400.jpg?hmac=yS3NpJkbt0GOhyNCnXicDhi04Vvx-WFxgPAEKVoykpc", alt: "Water Image" },
@@ -18,26 +23,28 @@ function Home() {
   ];
 
   useEffect(() => {
-    const result = localStorage.getItem("currentUser")
-    if(result){
-      const currentUser: UserType = JSON.parse(result) as UserType
+    const result = localStorage.getItem("currentUser");
+    if (result) {
+      const currentUser: UserType = JSON.parse(result) as UserType;
       dispatch(setCurrentUser(currentUser)); 
     }
-  }, [])
+  }, [dispatch]);
   
   return (
-      <div style={{display:'flex',flexDirection:'column',minHeight:'100vh'}}>
-        {/* Navbar */}
-       <Header/>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* Navbar */}
+      <Header />
 
-        {/* Header Section */}
-        <Box sx={{ backgroundColor: '#1976d2', padding: '20px', color: 'white', textAlign: 'center' }}>
-          <Typography variant={isMobile ? 'h5' : 'h3'}>Welcome to the Homepage</Typography>
-          <Typography variant="subtitle1">This is a responsive homepage with dark and light mode toggle.</Typography>
-        </Box>
+      {/* Header Section */}
+      <Box sx={{ backgroundColor: '#ff6600', padding: '20px', color: 'white', textAlign: 'center' }}>
+        <Typography variant={isMobile ? 'h5' : 'h3'}>
+        Welcome{currentUser ? `, ${currentUser.email.split('@')[0]}` : ''} to the Homepage
+        </Typography>
+        <Typography variant="subtitle1">This is a responsive homepage with dark and light mode toggle.</Typography>
+      </Box>
 
-        {/* Main Content Section */}
-        <Box sx={{ flex: '1', marginTop: '30px', marginBottom: '30px', width: '100%' }}>
+      {/* Main Content Section */}
+      <Box sx={{ flex: '1', marginTop: '30px', marginBottom: '30px', width: '100%' }}>
         <Carousel>
           {images.map((item, index) => (
             <Box
@@ -53,7 +60,6 @@ function Home() {
               <Box
                 component="img"
                 src={item.url}
-                alt={item.alt}
                 sx={{
                   maxHeight: '100%',
                   maxWidth: '100%',
@@ -64,9 +70,10 @@ function Home() {
           ))}
         </Carousel>
       </Box>
-{/* Footer Section */}
-       <Footer/>
-       </div>
+
+      {/* Footer Section */}
+      <Footer />
+    </div>
   );
 }
 

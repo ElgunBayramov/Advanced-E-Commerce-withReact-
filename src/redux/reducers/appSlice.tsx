@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { UserType } from '../../assets/types/sliceTypes'
+import { AppSliceType, UserType } from '../../assets/types/sliceTypes'
 
-export interface AppSliceType {
-    currentUser: UserType | null,
-    loading:boolean,
-    theme:boolean
-}
 
 const initialState: AppSliceType = {
     currentUser:null,
@@ -24,7 +19,7 @@ export const appSlice = createSlice({
         toggleTheme: (state:AppSliceType) => {
             state.theme = !state.theme
         },
-        setCurrentUser: (state:AppSliceType,action:PayloadAction<UserType>) => {
+        setCurrentUser: (state:AppSliceType,action:PayloadAction<UserType | null>) => {
             state.currentUser = action.payload
         }
     }

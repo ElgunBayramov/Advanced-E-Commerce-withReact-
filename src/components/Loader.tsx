@@ -11,7 +11,7 @@ function Loader() {
         sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
         open={loading}
       >
-        <CircularProgress color="info" />
+        <CircularProgress color="success" />
       </Backdrop>
     </div>
   );
