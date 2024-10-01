@@ -69,7 +69,7 @@ function Register() {
             borderRadius: '8px',
           }}
         >
-          <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 3, textAlign: 'center' }}>
+          <Typography variant={isMobile ? 'h5' : 'h4'} sx={{ mb: 3, textAlign: 'center',color:"black" }}>
             Register
           </Typography>
           <form onSubmit={handleSubmit}>

@@ -11,3 +11,19 @@ export const getAllProducts = createAsyncThunk<ProductType[]>(
     return response.data;
   }
 );
+
+export const getAllCategories = createAsyncThunk<string[]>(
+  "getAllCategories",
+  async () => {
+    const response = await axios.get<string[]>(`${BASE_URL}/products/categories`);
+    return response.data;
+  }
+);
+
+export const getProductsByCategoryName = createAsyncThunk<ProductType[],string>(
+  "getProductsByCategoryName",
+  async (categoryName:string) => {
+    const response = await axios.get<ProductType[]>(`${BASE_URL}/products/category/${categoryName}`);
+    return response.data;
+  }
+);

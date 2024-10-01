@@ -6,10 +6,12 @@ import { useAppDispatch, useAppSelector } from '../redux/store';
 import { useEffect } from 'react';
 import { UserType } from '../assets/types/sliceTypes';
 import { setCurrentUser } from '../redux/reducers/appSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const dispatch = useAppDispatch();
   const theme = useTheme();
+  const navigate = useNavigate()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   // Access the current user from the Redux store
@@ -27,6 +29,9 @@ function Home() {
     if (result) {
       const currentUser: UserType = JSON.parse(result) as UserType;
       dispatch(setCurrentUser(currentUser)); 
+    }
+    else{
+      navigate("/login")
     }
   }, [dispatch]);
   

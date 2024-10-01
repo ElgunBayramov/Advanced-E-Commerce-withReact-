@@ -1,19 +1,22 @@
-import { Logout, Menu } from '@mui/icons-material';
-import { AppBar, Box, Button, Drawer, IconButton, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { AppBar, Box, Button, Drawer, IconButton, TextField, Toolbar, useMediaQuery, useTheme } from '@mui/material';
+import { Menu, Logout } from '@mui/icons-material';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { setCurrentUser, toggleTheme } from '../redux/reducers/appSlice';
 import { FaMoon } from 'react-icons/fa';
 import { CiLight } from 'react-icons/ci';
 import { toast } from 'react-toastify';
+import { filterProducts } from '../redux/reducers/productSlice';
+import { getAllProducts } from '../redux/actions/productAction';
 
 function Header() {
     const { theme } = useAppSelector((state) => state.app);
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
     const themeforMUI = useTheme();
-    const navigate = useNavigate()
     const isMobile = useMediaQuery(themeforMUI.breakpoints.down('sm'));
+    const navigate = useNavigate();
+    const location = useLocation()
     const dispatch = useAppDispatch();
 
     const changeTheme = () => {
@@ -33,10 +36,24 @@ function Header() {
     };
 
     const handleLogout = () => {
-        localStorage.removeItem("currentUser")
-        dispatch(setCurrentUser(null))
-        navigate("/login")
-        toast.success("Hesabdan çıxıldı")
+        localStorage.removeItem("currentUser");
+        dispatch(setCurrentUser(null));
+        navigate("/login");
+        toast.success("Hesabdan çıxıldı");
+    };
+
+    const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            if(e.target.value){
+               await dispatch(filterProducts(e.target.value))
+            }
+            else{
+               await dispatch(getAllProducts())
+            }
+        } catch (error) {
+            toast.error("Axtarış edilərkən xəta baş verdi")
+        }
+        // Handle the search functionality based on searchQuery
     };
 
     const drawer = (
@@ -79,7 +96,21 @@ function Header() {
                 {isMobile ? (
                     <>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            {/* Theme Icon */}
+                            {location.pathname === "/products" && (
+
+                            <TextField
+                                onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleSearch(e)}
+                                placeholder="Search..."
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    backgroundColor: 'white',
+                                    borderRadius: '4px',
+                                    width: { xs: '100px', sm: '200px', md: '300px' },
+                                    marginRight: '8px'
+                                }}
+                            />
+                            )}
                             <IconButton color="inherit">
                                 {theme ? (
                                     <FaMoon className="react-icon" onClick={changeTheme} />
@@ -99,6 +130,21 @@ function Header() {
                     </>
                 ) : (
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        {location.pathname === "/products" && (
+
+                        <TextField
+                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleSearch(e)}
+                            placeholder="Search..."
+                            variant="outlined"
+                            size="small"
+                            sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '4px',
+                                width: { xs: '100px', sm: '200px', md: '300px' },
+                                marginRight: '16px'
+                            }}
+                        />
+                        )}
                         <IconButton color="inherit" sx={{ marginRight: '16px' }}>
                             {theme ? (
                                 <FaMoon className="react-icon" onClick={changeTheme} />
@@ -107,7 +153,7 @@ function Header() {
                             )}
                         </IconButton>
                         <IconButton color="inherit" onClick={handleLogout}>
-                            <Logout/>
+                            <Logout />
                         </IconButton>
                     </Box>
                 )}
