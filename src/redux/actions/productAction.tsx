@@ -27,3 +27,11 @@ export const getProductsByCategoryName = createAsyncThunk<ProductType[],string>(
     return response.data;
   }
 );
+
+export const getProductById = createAsyncThunk<ProductType,number>(
+  "getProductById",
+  async (id:number) => {
+    const response = await axios.get<ProductType>(`${BASE_URL}/products/${id}`);
+    return response.data;
+  }
+);

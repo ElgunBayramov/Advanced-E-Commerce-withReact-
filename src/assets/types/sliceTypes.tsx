@@ -13,7 +13,6 @@ export interface ProductType {
     category:string,
     image:string,
     rating:RatingType
-
 }
 
 interface RatingType{
@@ -27,6 +26,7 @@ export interface AppSliceType {
 }
 export interface ProductSliceType {
     products: ProductType[];
-    categories: string[]
+    categories: string[],
+    product: ProductType | null
 }
   

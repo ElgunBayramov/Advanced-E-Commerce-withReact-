@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import NotFound from "../pages/NotFound";
 import Products from "../pages/Products";
 import { useAppSelector } from "../redux/store";
+import ProductDetails from "../components/ProductDetails";
 
 function MainRouter() {
   const currentUser = useAppSelector((state) => state.app.currentUser);
@@ -16,6 +17,7 @@ function MainRouter() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/product-details/:id" element={<ProductDetails />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

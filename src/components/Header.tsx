@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { AppBar, Box, Button, Drawer, IconButton, TextField, Toolbar, useMediaQuery, useTheme } from '@mui/material';
+import { AppBar, Badge, Box, Button, Drawer, IconButton, TextField, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { Menu, Logout } from '@mui/icons-material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { setCurrentUser, toggleTheme } from '../redux/reducers/appSlice';
-import { FaMoon } from 'react-icons/fa';
-import { CiLight } from 'react-icons/ci';
+import { FaMoon, FaShoppingBasket } from 'react-icons/fa';
+import { CiLight, CiShoppingBasket } from 'react-icons/ci';
 import { toast } from 'react-toastify';
 import { filterProducts } from '../redux/reducers/productSlice';
 import { getAllProducts } from '../redux/actions/productAction';
@@ -96,6 +96,7 @@ function Header() {
                 {isMobile ? (
                     <>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      
                             {location.pathname === "/products" && (
 
                             <TextField
@@ -111,6 +112,9 @@ function Header() {
                                 }}
                             />
                             )}
+                              <Badge badgeContent={3} color="success">
+          <CiShoppingBasket className="react-icon" />
+          </Badge>
                             <IconButton color="inherit">
                                 {theme ? (
                                     <FaMoon className="react-icon" onClick={changeTheme} />
@@ -145,6 +149,12 @@ function Header() {
                             }}
                         />
                         )}
+                        <IconButton>
+
+                        <Badge badgeContent={3} color="success">
+          <FaShoppingBasket className="react-icon" />
+          </Badge>
+                        </IconButton>
                         <IconButton color="inherit" sx={{ marginRight: '16px' }}>
                             {theme ? (
                                 <FaMoon className="react-icon" onClick={changeTheme} />
@@ -153,7 +163,7 @@ function Header() {
                             )}
                         </IconButton>
                         <IconButton color="inherit" onClick={handleLogout}>
-                            <Logout />
+                            <Logout className='react-icon' />
                         </IconButton>
                     </Box>
                 )}

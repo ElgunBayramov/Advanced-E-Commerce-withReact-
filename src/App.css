@@ -8,3 +8,12 @@ body {
   min-height: 100vh; /* Ensure it covers at least the full viewport height */
   min-width: 100vw; /* Ensure it covers the full viewport width */
 }
+.react-icon {
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #ff6600;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s ease, padding 0.2s ease;
+}

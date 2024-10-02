@@ -1,13 +1,14 @@
 import { Card, CardContent, CardMedia, Typography, Grid, Rating, Box } from "@mui/material";
 import { ProductType } from '../assets/types/sliceTypes';
 import "../css/ProductCard.css"
+import { useNavigate } from "react-router-dom";
 interface ProductCardProps {
   product: ProductType;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const { id,title, price, description, category, image, rating } = product;
-
+  const { id,title, price, image, rating } = product;
+  const navigate = useNavigate()
   return (
     <div className="product-card" key={id}>
     <div className="product-image-wrapper">
@@ -28,7 +29,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </Typography>
       </Box>
 
-      <button className="details-button">
+      <button className="details-button" onClick={()=> navigate("/product-details/" + id)}>
         View Details
       </button>
     </div>

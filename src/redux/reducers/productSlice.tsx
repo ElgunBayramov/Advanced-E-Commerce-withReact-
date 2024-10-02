@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getAllCategories, getAllProducts, getProductsByCategoryName } from "../actions/productAction";
+import { getAllCategories, getAllProducts, getProductById, getProductsByCategoryName } from "../actions/productAction";
 import { ProductSliceType, ProductType } from "../../assets/types/sliceTypes";
 
 
 
 const initialState: ProductSliceType = {
   products: [],
-  categories:[]
+  categories:[],
+  product:null
 };
 
 export const productSlice = createSlice({
@@ -33,6 +34,9 @@ export const productSlice = createSlice({
       }),
       builder.addCase(getProductsByCategoryName.fulfilled, (state,action:PayloadAction<ProductType[]>) =>{
         state.products =action.payload;
+      }),
+      builder.addCase(getProductById.fulfilled, (state,action:PayloadAction<ProductType>) =>{
+        state.product =action.payload;
       })
   },
 });
