@@ -7,7 +7,7 @@ import { ProductSliceType, ProductType } from "../../assets/types/sliceTypes";
 const initialState: ProductSliceType = {
   products: [],
   categories:[],
-  product:null
+  product: null,
 };
 
 export const productSlice = createSlice({
@@ -36,7 +36,7 @@ export const productSlice = createSlice({
         state.products =action.payload;
       }),
       builder.addCase(getProductById.fulfilled, (state,action:PayloadAction<ProductType>) =>{
-        state.product =action.payload;
+        state.product = action.payload;
       })
   },
 });

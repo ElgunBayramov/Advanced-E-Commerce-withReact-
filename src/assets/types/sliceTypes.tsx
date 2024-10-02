@@ -27,6 +27,6 @@ export interface AppSliceType {
 export interface ProductSliceType {
     products: ProductType[];
     categories: string[],
-    product: ProductType | null
+    product: ProductType | null,
 }
   

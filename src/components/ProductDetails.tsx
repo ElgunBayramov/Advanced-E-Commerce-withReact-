@@ -13,13 +13,13 @@ function ProductDetails() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { product } = useAppSelector((state) => state.product); // Get loading state too
+    const product = useAppSelector((state) => state.product.product); // Get loading state too
     const [count, setCount] = useState<number>(1); // Default to 1 for quantity
 
     const fetchProduct = async (id: number) => {
         dispatch(setLoading(true)); // Set loading true before fetching
         try {
-            await dispatch(getProductById(id)); // Fetch product by ID
+         await dispatch(getProductById(id)); // Fetch product by ID
         } catch (error) {
             console.error("Failed to fetch product:", error);
         } finally {
@@ -28,22 +28,22 @@ function ProductDetails() {
     };
 
     useEffect(() => {
+ 
+        if (!product) {
+            const timer = setTimeout(() => {
+                toast.error("Məhsul tapılmadı");
+                navigate('/products');
+            }, 1000);
+            return () => clearTimeout(timer); // Clear timeout on unmount
+        }
+    }, [product, navigate]);
+    useEffect(() => {
         // Ensure ID is valid and fetch the product
         if (id) {
             fetchProduct(Number(id));
         }
     }, [dispatch, id]); // Fetch product whenever ID changes
 
-    useEffect(() => {
-        // Show error if the product is not found
-        if (product === null) {
-            toast.error("Məhsul tapılmadı");
-            const timer = setTimeout(() => {
-                navigate('/products');
-            }, 2000);
-            return () => clearTimeout(timer); // Clear timeout on unmount
-        }
-    }, [product, navigate]); // Check product state
 
     const increaseCount = () => setCount(count + 1);
     const decreaseCount = () => setCount(count > 1 ? count - 1 : 1);
@@ -57,7 +57,7 @@ function ProductDetails() {
             }}
         >
             <Header />
-            { product ? (
+            { product && (
                 <div className="productdetails">
                     <div style={{ display: 'flex', alignSelf: 'center' }}>
                         <img src={product.image} alt={product.title} />
@@ -74,8 +74,7 @@ function ProductDetails() {
                         <button className="add-to-cart">Add to Cart</button>
                     </div>
                 </div>
-            ) : (
-                <Navigate to="/products" />
+            
             )}
             <Footer />
         </Box>
