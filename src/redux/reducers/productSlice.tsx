@@ -8,12 +8,16 @@ const initialState: ProductSliceType = {
   products: [],
   categories:[],
   product: null,
+  loading:false
 };
 
 export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
+    setLoading: (state:ProductSliceType,action:PayloadAction<boolean>) => {
+      state.loading = action.payload;
+  },
     filterProducts: (state:ProductSliceType,action:PayloadAction<string>) => {
       const filteredList:ProductType[] = [];
       state.products.map((product:ProductType) => {
@@ -35,11 +39,13 @@ export const productSlice = createSlice({
       builder.addCase(getProductsByCategoryName.fulfilled, (state,action:PayloadAction<ProductType[]>) =>{
         state.products =action.payload;
       }),
-      builder.addCase(getProductById.fulfilled, (state,action:PayloadAction<ProductType>) =>{
+      builder.addCase(getProductById.fulfilled, (state, action) => {
+        console.log("Product fetched:", action.payload); // Log the product fetched
         state.product = action.payload;
-      })
+    })
+
   },
 });
 
-export const {filterProducts} = productSlice.actions;
+export const {filterProducts,setLoading} = productSlice.actions;
 export default productSlice.reducer;

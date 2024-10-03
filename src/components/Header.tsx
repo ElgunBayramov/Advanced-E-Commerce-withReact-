@@ -53,7 +53,7 @@ function Header() {
         } catch (error) {
             toast.error("Axtarış edilərkən xəta baş verdi")
         }
-        // Handle the search functionality based on searchQuery
+        
     };
 
     const drawer = (

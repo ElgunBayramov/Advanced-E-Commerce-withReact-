@@ -5,7 +5,7 @@ import { ProductType } from '../assets/types/sliceTypes'
 import ProductCard from '../components/ProductCard'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { setLoading } from '../redux/reducers/appSlice'
+import { setLoading } from '../redux/reducers/productSlice'
 import Category from '../components/Category'
 import { Box } from '@mui/material'
 

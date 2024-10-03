@@ -12,6 +12,7 @@ export interface ProductType {
     description:string,
     category:string,
     image:string,
+    count?:number,
     rating:RatingType
 }
 
@@ -28,5 +29,9 @@ export interface ProductSliceType {
     products: ProductType[];
     categories: string[],
     product: ProductType | null,
+    loading:boolean,
 }
-  
+
+export interface BasketSliceType {
+    basket:ProductType[]
+}

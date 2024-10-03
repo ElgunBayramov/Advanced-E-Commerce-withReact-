@@ -28,11 +28,10 @@ export const getProductsByCategoryName = createAsyncThunk<ProductType[],string>(
   }
 );
 
-export const getProductById = createAsyncThunk<ProductType,number>(
-  "getProductById",
+export const getProductById = createAsyncThunk(
+  'getProductById',
   async (id:number) => {
-    const response = await axios.get<ProductType>(`${BASE_URL}/products/${id}`);
-    console.log(response.data)
-    return response.data;
+      const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
+      return response.data; // Ensure this matches the structure of your ProductType
   }
 );
