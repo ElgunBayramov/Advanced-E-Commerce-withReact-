@@ -32,6 +32,11 @@ export interface ProductSliceType {
     loading:boolean,
 }
 
+export interface BasketItemType {
+    product: ProductType; // Assuming ProductType is already defined
+    quantity: number;
+}
+
 export interface BasketSliceType {
-    basket:ProductType[]
+    baskets: Record<string, BasketItemType[]>; // Each user has an array of basket items
 }

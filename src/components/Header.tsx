@@ -9,16 +9,25 @@ import { CiLight, CiShoppingBasket } from 'react-icons/ci';
 import { toast } from 'react-toastify';
 import { filterProducts } from '../redux/reducers/productSlice';
 import { getAllProducts } from '../redux/actions/productAction';
+import { UserType } from '../assets/types/sliceTypes';
 
 function Header() {
+    const { baskets } = useAppSelector((state) => state.basket);
+    const currentUserString = localStorage.getItem("currentUser");
     const { theme } = useAppSelector((state) => state.app);
-    const {basket} = useAppSelector((state)=> state.basket);
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
     const themeforMUI = useTheme();
     const isMobile = useMediaQuery(themeforMUI.breakpoints.down('sm'));
     const navigate = useNavigate();
-    const location = useLocation()
+    const location = useLocation();
     const dispatch = useAppDispatch();
+
+    let basketLength = 0; // Declare basketLength outside the condition
+    if (currentUserString) {
+        const currentUser: UserType = JSON.parse(currentUserString);
+        const userBasket = baskets[currentUser.id] || [];
+        basketLength = userBasket.length; // Assign value to basketLength
+    }
 
     const changeTheme = () => {
         const root = document.getElementById("root");
@@ -45,16 +54,14 @@ function Header() {
 
     const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
         try {
-            if(e.target.value){
-               await dispatch(filterProducts(e.target.value))
-            }
-            else{
-               await dispatch(getAllProducts())
+            if (e.target.value) {
+                await dispatch(filterProducts(e.target.value));
+            } else {
+                await dispatch(getAllProducts());
             }
         } catch (error) {
-            toast.error("Axtarış edilərkən xəta baş verdi")
+            toast.error("Axtarış edilərkən xəta baş verdi");
         }
-        
     };
 
     const drawer = (
@@ -97,25 +104,23 @@ function Header() {
                 {isMobile ? (
                     <>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      
                             {location.pathname === "/products" && (
-
-                            <TextField
-                                onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleSearch(e)}
-                                placeholder="Search..."
-                                variant="outlined"
-                                size="small"
-                                sx={{
-                                    backgroundColor: 'white',
-                                    borderRadius: '4px',
-                                    width: { xs: '100px', sm: '200px', md: '300px' },
-                                    marginRight: '8px'
-                                }}
-                            />
+                                <TextField
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearch(e)}
+                                    placeholder="Search..."
+                                    variant="outlined"
+                                    size="small"
+                                    sx={{
+                                        backgroundColor: 'white',
+                                        borderRadius: '4px',
+                                        width: { xs: '100px', sm: '200px', md: '300px' },
+                                        marginRight: '8px'
+                                    }}
+                                />
                             )}
-                              <Badge badgeContent={3} color="success">
-          <CiShoppingBasket className="react-icon" />
-          </Badge>
+                            <Badge badgeContent={basketLength} color="success">
+                                <CiShoppingBasket className="react-icon" />
+                            </Badge>
                             <IconButton color="inherit">
                                 {theme ? (
                                     <FaMoon className="react-icon" onClick={changeTheme} />
@@ -123,7 +128,6 @@ function Header() {
                                     <CiLight className="react-icon" onClick={changeTheme} />
                                 )}
                             </IconButton>
-                            {/* Menu Icon */}
                             <IconButton color="inherit" onClick={handleDrawerToggle}>
                                 <Menu />
                             </IconButton>
@@ -136,25 +140,23 @@ function Header() {
                 ) : (
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         {location.pathname === "/products" && (
-
-                        <TextField
-                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleSearch(e)}
-                            placeholder="Search..."
-                            variant="outlined"
-                            size="small"
-                            sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '4px',
-                                width: { xs: '100px', sm: '200px', md: '300px' },
-                                marginRight: '16px'
-                            }}
-                        />
+                            <TextField
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSearch(e)}
+                                placeholder="Search..."
+                                variant="outlined"
+                                size="small"
+                                sx={{
+                                    backgroundColor: 'white',
+                                    borderRadius: '4px',
+                                    width: { xs: '100px', sm: '200px', md: '300px' },
+                                    marginRight: '16px'
+                                }}
+                            />
                         )}
                         <IconButton>
-
-                        <Badge badgeContent={basket.length} color="success">
-          <FaShoppingBasket className="react-icon" />
-          </Badge>
+                            <Badge badgeContent={basketLength} color="success">
+                                <FaShoppingBasket className="react-icon" />
+                            </Badge>
                         </IconButton>
                         <IconButton color="inherit" sx={{ marginRight: '16px' }}>
                             {theme ? (

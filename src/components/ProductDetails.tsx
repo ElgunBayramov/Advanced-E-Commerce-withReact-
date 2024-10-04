@@ -8,15 +8,15 @@ import Footer from './Footer';
 import Header from './Header';
 import { Box } from '@mui/material';
 import { toast } from 'react-toastify';
-import { ProductType } from '../assets/types/sliceTypes';
+import { ProductType, UserType } from '../assets/types/sliceTypes';
 import { addToBasket } from '../redux/reducers/basketSlice';
 
 function ProductDetails() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const {product} = useAppSelector((state) => state.product); 
-    const [count, setCount] = useState<number>(1);
+    const { product } = useAppSelector((state) => state.product); 
+    const [count, setCount] = useState<number>(1); // State for product quantity
 
     const fetchProduct = async (id: number) => {
         dispatch(setLoading(true));
@@ -29,8 +29,8 @@ function ProductDetails() {
             dispatch(setLoading(false));
         }
     };
+
     useEffect(() => {
- 
         if (!product) {
             const timer = setTimeout(() => {
                 toast.error("Məhsul tapılmadı");
@@ -39,6 +39,7 @@ function ProductDetails() {
             return () => clearTimeout(timer); // Clear timeout on unmount
         }
     }, [product, navigate]);
+
     useEffect(() => {
         // Ensure ID is valid and fetch the product
         if (id) {
@@ -46,19 +47,12 @@ function ProductDetails() {
         }
     }, [dispatch, id]);
 
-
-    const addBasket = () => {
-      if(product){
-        const payload:ProductType = {
-            ...product,
-            count
+    const handleAddToBasket = (product: ProductType) => {
+        const currentUserString = localStorage.getItem("currentUser");
+        if (currentUserString) {
+            const currentUser: UserType = JSON.parse(currentUserString);
+            dispatch(addToBasket({ userId: currentUser.id, product, quantity: count })); // Pass count as quantity
         }
-        if(count>=1){
-          dispatch(addToBasket(payload))
-          toast.success(`${product.title} added to the basket!`);
-        }
-        setCount(0)
-      }
     };
 
     const increaseCount = () => setCount(count + 1);
@@ -75,22 +69,21 @@ function ProductDetails() {
             <Header />
             { product && (
                 <div className="productdetails">
-                <div style={{ display: 'flex', alignSelf: 'center' }}>
-                    <img src={product.image} alt={product.title} />
-                </div>
-                <div className="content">
-                    <h1>{product.title}</h1>
-                    <p>{product.description}</p>
-                    <p className="price">${product.price}</p>
-                    <div className="quantity-control">
-                        <button className="quantity-button" onClick={decreaseCount}>−</button>
-                        <span className="quantity-count">{count}</span>
-                        <button className="quantity-button" onClick={increaseCount}>+</button>
+                    <div style={{ display: 'flex', alignSelf: 'center' }}>
+                        <img src={product.image} alt={product.title} />
                     </div>
-                    <button className="add-to-cart" onClick={addBasket}>Add to Cart</button>
+                    <div className="content">
+                        <h1>{product.title}</h1>
+                        <p>{product.description}</p>
+                        <p className="price">${product.price}</p>
+                        <div className="quantity-control">
+                            <button className="quantity-button" onClick={decreaseCount}>−</button>
+                            <span className="quantity-count">{count}</span>
+                            <button className="quantity-button" onClick={increaseCount}>+</button>
+                        </div>
+                        <button className="add-to-cart" onClick={() => handleAddToBasket(product)}>Add to Cart</button>
+                    </div>
                 </div>
-            </div>
-            
             )}
             <Footer />
         </Box>

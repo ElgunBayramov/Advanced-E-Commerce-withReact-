@@ -20,16 +20,18 @@ function App() {
  useEffect(() => {
   const currentUserString: string | null = localStorage.getItem("currentUser");
   if (currentUserString) {
-    const currentUser: UserType = JSON.parse(currentUserString) as UserType;
+    const currentUser: UserType = JSON.parse(currentUserString);
     dispatch(setCurrentUser(currentUser));
 
+    // Get the user's specific basket
     const basketString = localStorage.getItem(`basket_${currentUser.id}`);
     if (basketString) {
-      const basket: ProductType[] = JSON.parse(basketString) as ProductType[];
-      dispatch(setBasket(basket));
+      const basket: ProductType[] = JSON.parse(basketString);
+      dispatch(setBasket({ userId: currentUser.id, products: basket })); // Store basket in Redux
     }
   }
-}, []);
+}, [dispatch]);
+
 
   return (
   <div>
