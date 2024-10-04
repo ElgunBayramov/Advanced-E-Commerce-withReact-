@@ -17,6 +17,12 @@
       "email": "elgun@mail.ru",
       "password": "elgun444",
       "balance": 1000
+    },
+    {
+      "id": "990081",
+      "email": "ilkin@mail.ru",
+      "password": "ilkin555",
+      "balance": 1000
     }
   ]
 }

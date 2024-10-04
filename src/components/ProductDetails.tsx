@@ -51,7 +51,8 @@ function ProductDetails() {
         const currentUserString = localStorage.getItem("currentUser");
         if (currentUserString) {
             const currentUser: UserType = JSON.parse(currentUserString);
-            dispatch(addToBasket({ userId: currentUser.id, product, quantity: count })); // Pass count as quantity
+            dispatch(addToBasket({ userId: currentUser.id, product, count }));
+            toast.success(`${product.title} səbətə əlavə edildi`)
         }
     };
 

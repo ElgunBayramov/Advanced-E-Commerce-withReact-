@@ -12,7 +12,6 @@ export interface ProductType {
     description:string,
     category:string,
     image:string,
-    count?:number,
     rating:RatingType
 }
 
@@ -33,10 +32,10 @@ export interface ProductSliceType {
 }
 
 export interface BasketItemType {
-    product: ProductType; // Assuming ProductType is already defined
-    quantity: number;
+    product: ProductType; 
+    count?: number;
 }
 
 export interface BasketSliceType {
-    baskets: Record<string, BasketItemType[]>; // Each user has an array of basket items
+    baskets: {[userId:string]:BasketItemType[]}; 
 }
