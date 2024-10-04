@@ -17,21 +17,20 @@ function App() {
    dispatch(getAllProducts())
  },[])
 
- useEffect(()=> {
-  const currentUserString: string | null = localStorage.getItem("currentUser");
-  if(currentUserString){
-    const currentUser:UserType = JSON.parse(currentUserString) as UserType;
-    dispatch(setCurrentUser(currentUser))
-  }
- },[])
-
  useEffect(() => {
-const basketString = localStorage.getItem("basket");
-if(basketString){
-  const basket:ProductType[] = JSON.parse(basketString) as ProductType[]
-  dispatch(setBasket(basket));
-}
- },[])
+  const currentUserString: string | null = localStorage.getItem("currentUser");
+  if (currentUserString) {
+    const currentUser: UserType = JSON.parse(currentUserString) as UserType;
+    dispatch(setCurrentUser(currentUser));
+
+    const basketString = localStorage.getItem(`basket_${currentUser.id}`);
+    if (basketString) {
+      const basket: ProductType[] = JSON.parse(basketString) as ProductType[];
+      dispatch(setBasket(basket));
+    }
+  }
+}, []);
+
   return (
   <div>
     <MainRouter/>

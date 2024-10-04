@@ -12,6 +12,7 @@ import { getAllProducts } from '../redux/actions/productAction';
 
 function Header() {
     const { theme } = useAppSelector((state) => state.app);
+    const {basket} = useAppSelector((state)=> state.basket);
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
     const themeforMUI = useTheme();
     const isMobile = useMediaQuery(themeforMUI.breakpoints.down('sm'));
@@ -151,7 +152,7 @@ function Header() {
                         )}
                         <IconButton>
 
-                        <Badge badgeContent={3} color="success">
+                        <Badge badgeContent={basket.length} color="success">
           <FaShoppingBasket className="react-icon" />
           </Badge>
                         </IconButton>
