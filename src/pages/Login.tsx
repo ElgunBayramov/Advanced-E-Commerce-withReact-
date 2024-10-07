@@ -1,7 +1,7 @@
 import { Box, Button, Grid, TextField, Typography, useMediaQuery, useTheme, InputAdornment } from '@mui/material';
 import { AccountCircle, Lock} from '@mui/icons-material'; // Import visibility icons
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MdVisibility,MdVisibilityOff } from "react-icons/md"
 import { UserType } from '../assets/types/sliceTypes';
 import { toast } from 'react-toastify';

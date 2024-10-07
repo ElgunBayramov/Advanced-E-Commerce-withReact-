@@ -33,7 +33,7 @@ function Home() {
     else{
       navigate("/login")
     }
-  }, [dispatch]);
+  }, [dispatch,navigate]);
   
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

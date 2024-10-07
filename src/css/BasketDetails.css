@@ -1,0 +1,92 @@
+.drawer-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 300px; /* Limit the max width for smaller screens */
+}
+
+.drawer-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.drawer-item img {
+  width: 60px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.drawer-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.drawer-item-details p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.drawer-item .delete-button {
+  background: none;
+  border: none;
+  color: #ff6d00;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer-item .delete-button:hover {
+  color: #ff6d00;
+}
+.total-amount {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #f8f8f8;
+  margin-top: auto;
+}
+/* Responsive Styles */
+@media (min-width: 768px) {
+  .drawer-content {
+    max-width: 400px; /* Increase the width for larger screens */
+  }
+  .total-amount {
+    font-size: 16px;
+  }
+  .drawer-item img {
+    width: 80px;
+  }
+
+  .drawer-item-details p {
+    font-size: 1rem;
+  }
+
+  .drawer-item .delete-button {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .drawer-content {
+    max-width: 500px; /* Further increase the width for desktops */
+  }
+
+  .drawer-item-details p {
+    font-size: 1.1rem;
+  }
+  .total-amount {
+    font-size: 20px;
+  }
+}
