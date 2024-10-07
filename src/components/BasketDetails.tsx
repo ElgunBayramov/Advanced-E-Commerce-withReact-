@@ -1,6 +1,6 @@
 import { Drawer } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../redux/store';
-import { calculateBasket, removeProductFromBasket, setDrawer } from '../redux/reducers/basketSlice';
+import { calculateBasket, removeProductFromBasket, setDrawer, setUserBalance, updateBalance } from '../redux/reducers/basketSlice';
 import { MdDelete } from 'react-icons/md';
 import "../css/BasketDetails.css";
 import { ProductType } from '../assets/types/sliceTypes';
@@ -28,12 +28,23 @@ function BasketDetails() {
             toast.success("Məhsul silindi!")
           }
     }
-
+   
+    const buyItem = () => {
+        if (currentUser) {
+            if (currentUser.balance < totalAmount) {
+                toast.warn("Balansınızda kifayət qədər məbləğ yoxdur");
+                return;
+            }
+            dispatch(updateBalance({ userId: currentUser.id, totalAmount }));
+        }
+    };
+    
     useEffect(() => {
         if (currentUser) {
-          dispatch(calculateBasket({ userId: currentUser.id }));
+            dispatch(calculateBasket({ userId: currentUser.id }));
         }
-      }, [currentUser,baskets, dispatch]);
+    }, [currentUser, baskets, dispatch]);
+
 
     return (
         <Drawer open={drawer} anchor="right" onClose={closeDrawer}>
@@ -63,6 +74,11 @@ function BasketDetails() {
                         <div className="total-amount">
                             <p>Total Amount: ${totalAmount.toFixed(2)}</p>
                         </div>
+                        <div className="buy-button-container">
+                    <button className="buy-button" onClick={buyItem}>
+                        İndi al
+                    </button>
+                </div>
                     </>
                 ) : (
                     <p>Your basket is empty.</p>

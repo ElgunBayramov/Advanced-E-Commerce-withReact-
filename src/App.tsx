@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { getAllProducts } from './redux/actions/productAction';
 import { ProductType, UserType } from './assets/types/sliceTypes';
 import { setCurrentUser } from './redux/reducers/appSlice';
-import { setBasket } from './redux/reducers/basketSlice';
+import { setBasket, setUserBalance } from './redux/reducers/basketSlice';
 import BasketDetails from './components/BasketDetails';
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
   }, [dispatch]);
   const currentUserString = localStorage.getItem("currentUser");
 
+  
   useEffect(() => {
     if (currentUserString) {
       const currentUser: UserType = JSON.parse(currentUserString);
@@ -28,9 +29,13 @@ function App() {
       if (basketString) {
         const basket: ProductType[] = JSON.parse(basketString);
         dispatch(setBasket({ userId: currentUser.id, products: basket })); // Store basket in Redux
+        dispatch(setUserBalance({ userId: currentUser.id, balance: currentUser.balance }));
+        console.log("User balance set in Redux:", currentUser.balance);
       }
     }
   }, [currentUserString,dispatch]); // Adding dispatch to the dependency array
+
+
 
   // useEffect(() => {
   //   const currentUserString = localStorage.getItem("currentUser");

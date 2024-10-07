@@ -57,6 +57,22 @@
   background-color: #f8f8f8;
   margin-top: auto;
 }
+.buy-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.buy-button:hover {
+  background-color: #ff6d00;
+}
 /* Responsive Styles */
 @media (min-width: 768px) {
   .drawer-content {

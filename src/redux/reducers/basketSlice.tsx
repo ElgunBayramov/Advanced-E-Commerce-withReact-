@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BasketSliceType, ProductType } from "../../assets/types/sliceTypes";
+import { toast } from "react-toastify";
 
 
 const initialState: BasketSliceType = {
@@ -44,17 +45,17 @@ export const basketSlice = createSlice({
   },
   calculateBasket: (state: BasketSliceType, action: PayloadAction<{ userId: string }>) => {
     const { userId } = action.payload;
-    let sum: number = 0;
+    let total: number = 0;
     
     if (state.baskets[userId]) {
       state.baskets[userId].map(basketItem => {
         if (basketItem.count) {
-          sum = sum + (basketItem.product.price * basketItem.count);
+          total = total + (basketItem.product.price * basketItem.count);
         }
       });
     }
     
-    state.totalAmount = sum;
+    state.totalAmount = total;
   },
   removeProductFromBasket: (state: BasketSliceType, action: PayloadAction<{ userId: string; productId: number }>) => {
     const { userId, productId } = action.payload;
@@ -65,8 +66,48 @@ export const basketSlice = createSlice({
       localStorage.setItem(`basket_${userId}`, JSON.stringify(state.baskets[userId]));
     }
   },
+  updateBalance: (state: BasketSliceType, action: PayloadAction<{ userId: string; totalAmount: number }>) => {
+    const { userId, totalAmount } = action.payload;
+    const currentUserString = localStorage.getItem("currentUser");
+    const currentUser = currentUserString ? JSON.parse(currentUserString) : null;
+
+    if (currentUser && currentUser.balance >= totalAmount) {
+      currentUser.balance -= totalAmount;
+      
+      state.baskets[userId] = [];
+      state.totalAmount = 0;
+      
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      localStorage.setItem(`basket_${userId}`, JSON.stringify([]));
+
+      toast.success("Məhsullar uğurla alındı!");
+    } else {
+      toast.warn("Balansınızda kifayət qədər məbləğ yoxdur!");
+    }
+  },
+
+  setUserBalance: (state: BasketSliceType, action: PayloadAction<{ userId: string; balance: number }>) => {
+    const { userId, balance } = action.payload;
+    const currentUserString = localStorage.getItem("currentUser");
+    const currentUser = currentUserString ? JSON.parse(currentUserString) : null;
+
+    if (currentUser && currentUser.id === userId) {
+      currentUser.balance = balance; // Update the balance
+      localStorage.setItem("currentUser", JSON.stringify(currentUser)); // Update localStorage
+
+      // Update the user's basket in Redux
+      if (state.baskets[userId]) {
+        state.baskets[userId] = state.baskets[userId].map(item => ({
+          ...item,
+          // Assuming you want to store balance in the basket items as well
+          balance: currentUser.balance,
+        }));
+      }
+    }}
+
+
 }
 });
 
-export const { addToBasket, setBasket, setDrawer, calculateBasket, removeProductFromBasket } = basketSlice.actions;
+export const { addToBasket, setBasket, setDrawer, calculateBasket, removeProductFromBasket, updateBalance, setUserBalance } = basketSlice.actions;
 export default basketSlice.reducer;
