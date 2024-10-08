@@ -72,7 +72,7 @@ function BasketDetails() {
                             );
                         })}
                         <div className="total-amount">
-                            <p>Total Amount: ${totalAmount.toFixed(2)}</p>
+                            <p>Ümumi məbləğ: ${totalAmount.toFixed(2)}</p>
                         </div>
                         <div className="buy-button-container">
                     <button className="buy-button" onClick={buyItem}>

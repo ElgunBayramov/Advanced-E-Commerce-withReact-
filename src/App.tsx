@@ -23,17 +23,25 @@ function App() {
     if (currentUserString) {
       const currentUser: UserType = JSON.parse(currentUserString);
       dispatch(setCurrentUser(currentUser));
-
+  
       // Get the user's specific basket
       const basketString = localStorage.getItem(`basket_${currentUser.id}`);
       if (basketString) {
         const basket: ProductType[] = JSON.parse(basketString);
         dispatch(setBasket({ userId: currentUser.id, products: basket })); // Store basket in Redux
         dispatch(setUserBalance({ userId: currentUser.id, balance: currentUser.balance }));
-        console.log("User balance set in Redux:", currentUser.balance);
       }
+  
+      // Get the updated balance from localStorage
+      // const storedBalance = localStorage.getItem(`balance_${currentUser.id}`);
+      // if (storedBalance) {
+      //   dispatch(setUserBalance({ userId: currentUser.id, balance: parseFloat(storedBalance) }));
+      // } else {
+      //   // If no stored balance, use the balance from the user object
+      // }
     }
-  }, [currentUserString,dispatch]); // Adding dispatch to the dependency array
+  }, [currentUserString, dispatch]);
+  
 
 
 

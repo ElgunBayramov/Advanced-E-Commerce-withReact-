@@ -18,12 +18,12 @@ function Home() {
   const currentUser = useAppSelector((state) => state.app.currentUser);
 
   const images = [
-    { url: "https://fastly.picsum.photos/id/241/800/400.jpg?hmac=joyUUPqCSjHTHvTHhHGnQ32sBDxnNoPVDlaahFNeQeQ", alt: "Nature Image" },
-    { url: "https://fastly.picsum.photos/id/65/800/400.jpg?hmac=yS3NpJkbt0GOhyNCnXicDhi04Vvx-WFxgPAEKVoykpc", alt: "Water Image" },
-    { url: "https://fastly.picsum.photos/id/185/800/400.jpg?hmac=gVXAxMT2cDEhSwhroZ-RVqLDyRBEv2stx7ocke_X_zc", alt: "City Image" },
-    { url: "https://fastly.picsum.photos/id/44/800/400.jpg?hmac=xoTFsXUr0KKkMO8j2kMp6vxnpI3TrCXtSAPH6tZY7AM", alt: "Forest Image" }
+    { url: "https://www.asiaction.com/wp-content/uploads/furniture-import-blog.png", alt: "Nature Image" },
+    { url: "https://media.licdn.com/dms/image/v2/D4D12AQHDE8G1TGFoOw/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1693383577655?e=2147483647&v=beta&t=scesqgZ3SmD_iMLOILfJyMgs1eERUtZ0je1y07bb7RY", alt: "Water Image" },
+    { url: "https://media.licdn.com/dms/image/v2/C5612AQGOGS95pwSsUA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1584373295105?e=2147483647&v=beta&t=SIt6l8r7Ze4Ux1t7sDBu1nLwMQ1IEQJEGgmLLayKtzg", alt: "City Image" },
+    { url: "https://media.licdn.com/dms/image/C5612AQEvSUsNtrnnKg/article-cover_image-shrink_600_2000/0/1634266228061?e=2147483647&v=beta&t=wTpVQG0uHSK6DCAiv5NPN7KVl11eHmE2J1hGdd8H21E", alt: "Forest Image" }
   ];
-
+  
   useEffect(() => {
     const result = localStorage.getItem("currentUser");
     if (result) {

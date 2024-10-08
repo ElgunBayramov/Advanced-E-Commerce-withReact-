@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BasketSliceType, ProductType } from "../../assets/types/sliceTypes";
 import { toast } from "react-toastify";
+import LoginService from "../../services/LoginService";
 
 
 const initialState: BasketSliceType = {
@@ -66,25 +67,31 @@ export const basketSlice = createSlice({
       localStorage.setItem(`basket_${userId}`, JSON.stringify(state.baskets[userId]));
     }
   },
+
   updateBalance: (state: BasketSliceType, action: PayloadAction<{ userId: string; totalAmount: number }>) => {
     const { userId, totalAmount } = action.payload;
     const currentUserString = localStorage.getItem("currentUser");
     const currentUser = currentUserString ? JSON.parse(currentUserString) : null;
-
+  
     if (currentUser && currentUser.balance >= totalAmount) {
       currentUser.balance -= totalAmount;
-      
+  
+      // Save updated balance to Redux and localStorage
       state.baskets[userId] = [];
       state.totalAmount = 0;
-      
+  
+      // Update balance in localStorage
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       localStorage.setItem(`basket_${userId}`, JSON.stringify([]));
-
+  
+      // Update balance, email, and password in the database
+      LoginService.updateUserBalance(userId, currentUser.email, currentUser.password, currentUser.balance); // Pass email and password
+  
       toast.success("Məhsullar uğurla alındı!");
-    } else {
-      toast.warn("Balansınızda kifayət qədər məbləğ yoxdur!");
     }
   },
+  
+  
 
   setUserBalance: (state: BasketSliceType, action: PayloadAction<{ userId: string; balance: number }>) => {
     const { userId, balance } = action.payload;

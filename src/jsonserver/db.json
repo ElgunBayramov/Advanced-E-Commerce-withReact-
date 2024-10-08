@@ -1,28 +1,34 @@
 {
   "users": [
     {
-      "id": "537651",
       "email": "messi@mail.ru",
       "password": "messimessi",
-      "balance": 1000
+      "balance": 897.16,
+      "id": "537651"
     },
     {
-      "id": "826287",
       "email": "ronaldo@mail.ru",
       "password": "ronaldo123",
-      "balance": 1000
+      "balance": 776.03,
+      "id": "826287"
     },
     {
-      "id": "856057",
       "email": "elgun@mail.ru",
       "password": "elgun444",
-      "balance": 1000
+      "balance": 797.14,
+      "id": "856057"
     },
     {
       "id": "990081",
       "email": "ilkin@mail.ru",
       "password": "ilkin555",
       "balance": 1000
+    },
+    {
+      "email": "maga@mail.ru",
+      "password": "maganiva",
+      "balance": 967.03,
+      "id": "560001"
     }
   ]
 }
