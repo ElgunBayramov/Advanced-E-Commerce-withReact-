@@ -1,7 +1,7 @@
 import jsonServer from "json-server";
 
 const server = jsonServer.create();
-const router = jsonServer.router("json-server/db.json");
+const router = jsonServer.router("jsonserver/db.json");
 const middlewares = jsonServer.defaults();
 
 server.use(middlewares);
