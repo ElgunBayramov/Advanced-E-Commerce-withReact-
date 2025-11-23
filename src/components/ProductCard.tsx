@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Typography, Grid, Rating, Box } from "@mui/material";
+import { Typography, Rating, Box } from "@mui/material";
 import { ProductType } from '../assets/types/sliceTypes';
 import "../css/ProductCard.css"
 import { useNavigate } from "react-router-dom";

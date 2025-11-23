@@ -1,6 +1,6 @@
 import { Drawer } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../redux/store';
-import { calculateBasket, removeProductFromBasket, setDrawer, setUserBalance, updateBalance } from '../redux/reducers/basketSlice';
+import { calculateBasket, removeProductFromBasket, setDrawer, updateBalance } from '../redux/reducers/basketSlice';
 import { MdDelete } from 'react-icons/md';
 import "../css/BasketDetails.css";
 import { ProductType } from '../assets/types/sliceTypes';

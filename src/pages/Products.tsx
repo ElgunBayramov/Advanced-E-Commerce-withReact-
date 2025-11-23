@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../redux/store'
 import { getAllProducts } from '../redux/actions/productAction'
 import { ProductType } from '../assets/types/sliceTypes'

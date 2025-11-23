@@ -2,7 +2,6 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import NotFound from "../pages/NotFound";
 import Products from "../pages/Products";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import ProductDetails from "../components/ProductDetails";
