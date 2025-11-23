@@ -90,8 +90,6 @@ export const basketSlice = createSlice({
       toast.success("Məhsullar uğurla alındı!");
     }
   },
-  
-  
 
   setUserBalance: (state: BasketSliceType, action: PayloadAction<{ userId: string; balance: number }>) => {
     const { userId, balance } = action.payload;

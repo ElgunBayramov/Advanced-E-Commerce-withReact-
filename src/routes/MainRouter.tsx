@@ -24,17 +24,20 @@ function MainRouter() {
   }, [location.pathname]); 
   return (
     <Routes>
-      {currentUser && ( 
-        <>
+        
       <Route path="/" element={<Home/>} />
       <Route path="/products" element={<Products />} />
       <Route path="/product-details/:id" element={<ProductDetails />} />
-      </>
-      )
-      }
+      
+      
+      
       {/* <Route path="/home" element={<Home />} /> */}
+      {!currentUser && ( 
+      <>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+    </>
+      )}
     </Routes>
   );
 }

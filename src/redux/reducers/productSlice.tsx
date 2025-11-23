@@ -3,12 +3,11 @@ import { getAllCategories, getAllProducts, getProductById, getProductsByCategory
 import { ProductSliceType, ProductType } from "../../assets/types/sliceTypes";
 
 
-
 const initialState: ProductSliceType = {
   products: [],
-  categories:[],
+  categories: [],
   product: null,
-  loading:false
+  loading: false
 };
 
 export const productSlice = createSlice({
