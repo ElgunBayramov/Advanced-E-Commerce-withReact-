@@ -11,11 +11,9 @@ function BasketDetails() {
     const { drawer, baskets,totalAmount } = useAppSelector((state) => state.basket);
     const dispatch = useAppDispatch();
 
-    // Get current user from localStorage
     const currentUserString = localStorage.getItem("currentUser");
     const currentUser = currentUserString ? JSON.parse(currentUserString) : null;
 
-    // Access the current user's specific basket
     const userBasket = currentUser ? baskets[currentUser.id] || [] : [];
 
     const closeDrawer = () => {
@@ -25,14 +23,14 @@ function BasketDetails() {
     const handleDelete = (product:ProductType) => {
         if (currentUser) {
             dispatch(removeProductFromBasket({ userId: currentUser.id, productId: product.id }));
-            toast.success("Məhsul silindi!")
+            toast.success("Product deleted!")
           }
     }
    
     const buyItem = () => {
         if (currentUser) {
             if (currentUser.balance < totalAmount) {
-                toast.warn("Balansınızda kifayət qədər məbləğ yoxdur");
+                toast.warn("Insufficient balance!");
                 return;
             }
             dispatch(updateBalance({ userId: currentUser.id, totalAmount }));
@@ -52,7 +50,6 @@ function BasketDetails() {
                 {userBasket && userBasket.length > 0 ? (
                     <>
                         {userBasket.map((basketItem: { product: ProductType, count?: number }) => {
-                            // Log the product details
                             console.log("Basket Item:", basketItem);
                             console.log("userbasket:", userBasket);
                             console.log("Basket Item product image:", basketItem.product.image);
@@ -72,11 +69,11 @@ function BasketDetails() {
                             );
                         })}
                         <div className="total-amount">
-                            <p>Ümumi məbləğ: ${totalAmount.toFixed(2)}</p>
+                            <p>Total amount: ${totalAmount.toFixed(2)}</p>
                         </div>
                         <div className="buy-button-container">
                     <button className="buy-button" onClick={buyItem}>
-                        İndi al
+                        Buy Now
                     </button>
                 </div>
                     </>

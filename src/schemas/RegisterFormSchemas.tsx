@@ -3,13 +3,13 @@ import * as yup from "yup";
 export const registerFormSchemas = yup.object().shape({
   email: yup
     .string()
-    .email("Email adresi düzgün daxil edilməyib")
-    .required("Xana boş buraxıla bilməz"),
+    .email("The email address was entered incorrectly.")
+    .required("The cell cannot be left blank."),
   password: yup.string().
-  min(8,"Şifrə ən az 8 simvol olmalıdır").
-  required("Xana boş buraxıla bilməz"),
+  min(8,"Password must be at least 8 characters long.").
+  required("The cell cannot be left blank."),
   confirmPassword: yup
     .string()
-    .required("Xana boş buraxıla bilməz")
-    .oneOf([yup.ref("password")], "Şifrələr eyni deyil"),
+    .required("The cell cannot be left blank.")
+    .oneOf([yup.ref("password")], "Passwords are not the same."),
 });

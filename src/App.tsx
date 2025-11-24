@@ -28,11 +28,10 @@ function App() {
       const basketString = localStorage.getItem(`basket_${currentUser.id}`);
       if (basketString) {
         const basket: ProductType[] = JSON.parse(basketString);
-        dispatch(setBasket({ userId: currentUser.id, products: basket })); // Store basket in Redux
+        dispatch(setBasket({ userId: currentUser.id, products: basket })); 
         dispatch(setUserBalance({ userId: currentUser.id, balance: currentUser.balance }));
       }
   
-      // Get the updated balance from localStorage
       // const storedBalance = localStorage.getItem(`balance_${currentUser.id}`);
       // if (storedBalance) {
       //   dispatch(setUserBalance({ userId: currentUser.id, balance: parseFloat(storedBalance) }));

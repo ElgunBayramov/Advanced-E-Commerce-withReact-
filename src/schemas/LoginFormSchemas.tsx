@@ -3,8 +3,8 @@ import * as yup from "yup";
 export const loginFormSchemas = yup.object().shape({
   email: yup
     .string()
-    .email("Email adresi düzgün daxil edilməyib")
-    .required("Xana boş buraxıla bilməz"),
+    .email("The email address was entered incorrectly.")
+    .required("The cell cannot be left blank."),
   password: yup.string().
-  required("Xana boş buraxıla bilməz"),
+  required("The cell cannot be left blank."),
 });

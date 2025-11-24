@@ -17,7 +17,7 @@ function MainRouter() {
     dispatch(setLoading(true));
     const timer = setTimeout(() => {
       dispatch(setLoading(false));
-    }, 1000); // Delay for 1 second to show loader
+    }, 1000); 
 
     return () => clearTimeout(timer);
   }, [location.pathname]); 

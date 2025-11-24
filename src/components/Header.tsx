@@ -55,7 +55,7 @@ function Header() {
         localStorage.removeItem("currentUser");
         dispatch(setCurrentUser(null));
         navigate("/login");
-        toast.success("Hesabdan çıxıldı");
+        toast.success("Logged out successfully");
     };
 
     const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +66,7 @@ function Header() {
                 await dispatch(getAllProducts());
             }
         } catch (error) {
-            toast.error("Axtarış edilərkən xəta baş verdi");
+            toast.error("An error occurred while searching.");
         }
     };
 

@@ -22,23 +22,17 @@ export const basketSlice = createSlice({
     },
   addToBasket: (state:BasketSliceType, action: PayloadAction<{ userId: string; product: ProductType; count: number }>) => {
     const { userId, product, count } = action.payload;
-    //səbətdə məhsul yoxdur
     const userBasket = state.baskets[userId] || [];
 
-    //səbətdə məhsul var
     const existingProduct = userBasket.find(item => item.product.id === product.id);
-    // bu məhsulu səbətdən tapırıq
     if (existingProduct && existingProduct.count) {
-      // Məhsul tapılarsa, onun sayını artır
       existingProduct.count += count;
     } else {
-      // Məhsul tapılmazsa, yeni olaraq əlavə et
       userBasket.push({ product, count });
     }
 
     state.baskets[userId] = userBasket;
 
-    // Basketi localStorage-də də yenilə
     localStorage.setItem(`basket_${userId}`, JSON.stringify(userBasket));
   },
   setDrawer:(state:BasketSliceType,action:PayloadAction<boolean>) => {
@@ -76,16 +70,13 @@ export const basketSlice = createSlice({
     if (currentUser && currentUser.balance >= totalAmount) {
       currentUser.balance -= totalAmount;
   
-      // Save updated balance to Redux and localStorage
       state.baskets[userId] = [];
       state.totalAmount = 0;
   
-      // Update balance in localStorage
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       localStorage.setItem(`basket_${userId}`, JSON.stringify([]));
   
-      // Update balance, email, and password in the database
-      LoginService.updateUserBalance(userId, currentUser.email, currentUser.password, currentUser.balance); // Pass email and password
+      LoginService.updateUserBalance(userId, currentUser.email, currentUser.password, currentUser.balance); 
   
       toast.success("Məhsullar uğurla alındı!");
     }
@@ -97,14 +88,12 @@ export const basketSlice = createSlice({
     const currentUser = currentUserString ? JSON.parse(currentUserString) : null;
 
     if (currentUser && currentUser.id === userId) {
-      currentUser.balance = balance; // Update the balance
-      localStorage.setItem("currentUser", JSON.stringify(currentUser)); // Update localStorage
+      currentUser.balance = balance; 
+      localStorage.setItem("currentUser", JSON.stringify(currentUser)); 
 
-      // Update the user's basket in Redux
       if (state.baskets[userId]) {
         state.baskets[userId] = state.baskets[userId].map(item => ({
           ...item,
-          // Assuming you want to store balance in the basket items as well
           balance: currentUser.balance,
         }));
       }

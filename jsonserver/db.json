@@ -3,7 +3,7 @@
     {
       "email": "messi@mail.ru",
       "password": "messimessi",
-      "balance": 742.6099999999999,
+      "balance": 732.7599999999999,
       "id": "537651"
     },
     {
@@ -19,16 +19,22 @@
       "id": "856057"
     },
     {
-      "id": "990081",
       "email": "ilkin@mail.ru",
       "password": "ilkin555",
-      "balance": 1000
+      "balance": 401,
+      "id": "990081"
     },
     {
       "email": "maga@mail.ru",
       "password": "maganiva",
       "balance": 967.03,
       "id": "560001"
+    },
+    {
+      "id": "560092",
+      "email": "madina@mail.ru",
+      "password": "madina@44",
+      "balance": 1000
     }
   ]
 }

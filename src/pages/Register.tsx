@@ -17,8 +17,7 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
 
   const submit = async(values:any) => {
-    // console.log(values)
-    // console.log(actions)
+   
     try {
       const payload:UserType = {
         id:String(Math.floor(Math.random()*999999)),
@@ -29,11 +28,11 @@ function Register() {
       const response = await registerService.AddNewUser(payload)
       if(response){
         resetForm()
-        toast.success("Qeydiyyat uğurla tamamlandı")
+        toast.success("Registration completed successfully.")
         navigate("/login")
       }
     } catch (error) {
-      toast.error("Qeydiyyatdan keçərkən xəta baş verdi")
+      toast.error("An error occurred while signing up.")
     }
   }
 

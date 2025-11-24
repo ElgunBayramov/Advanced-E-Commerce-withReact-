@@ -14,7 +14,6 @@ function Home() {
   const navigate = useNavigate()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
-  // Access the current user from the Redux store
   const currentUser = useAppSelector((state) => state.app.currentUser);
 
   const images = [
@@ -43,7 +42,7 @@ function Home() {
       {/* Header Section */}
       <Box sx={{ backgroundColor: '#ff6600', padding: '20px', color: 'white', textAlign: 'center' }}>
         <Typography variant={isMobile ? 'h5' : 'h3'}>
-        Welcome{currentUser ? `, ${currentUser.email.split('@')[0]}` : ''} to the Homepage
+        Welcome{currentUser ? `, ${currentUser.email.split('@')[0]}` : ''} to the Website
         </Typography>
         <Typography variant="subtitle1">This is a responsive homepage with dark and light mode toggle.</Typography>
       </Box>
@@ -58,7 +57,7 @@ function Home() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '400px', // Fixed height for images
+                height: '400px', 
                 width: '100%',
               }}
             >

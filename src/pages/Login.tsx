@@ -1,5 +1,5 @@
 import { Box, Button, Grid, TextField, Typography, useMediaQuery, useTheme, InputAdornment } from '@mui/material';
-import { AccountCircle, Lock} from '@mui/icons-material'; // Import visibility icons
+import { AccountCircle, Lock} from '@mui/icons-material'; 
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { MdVisibility,MdVisibilityOff } from "react-icons/md"
@@ -47,11 +47,11 @@ function Login() {
           navigate("/");
         }
         else {
-          toast.error("İstifadəçi adı və ya şifrə yanlışdır");
+          toast.error("Username or password is incorrect.");
         }
       }
     } catch (error) {
-      toast.error("Daxil olarkən xəta baş verdi!");
+      toast.error("An error occurred while signing in!");
     } finally {
       dispatch(setLoading(false));
     }
@@ -164,7 +164,7 @@ function Login() {
 
         {/* Register Redirect Text */}
         <Typography sx={{ mt: 2, textAlign: 'center',color:'black' }}>
-          Hesabınız yoxdur? <Button component={Link} to="/register" color="info">Qeydiyyatdan keçin</Button>
+          Don't have an account? <Button component={Link} to="/register" color="info">Register</Button>
         </Typography>
       </Box>
     </Grid>

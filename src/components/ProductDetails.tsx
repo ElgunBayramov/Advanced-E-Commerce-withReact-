@@ -16,7 +16,7 @@ function ProductDetails() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { product } = useAppSelector((state) => state.product); 
-    const [count, setCount] = useState<number>(1); // State for product quantity
+    const [count, setCount] = useState<number>(1); 
 
     const fetchProduct = async (id: number) => {
         dispatch(setLoading(true));
@@ -36,12 +36,11 @@ function ProductDetails() {
                 toast.error("Məhsul tapılmadı");
                 navigate('/products');
             }, 1000);
-            return () => clearTimeout(timer); // Clear timeout on unmount
+            return () => clearTimeout(timer); 
         }
     }, [product, navigate]);
 
     useEffect(() => {
-        // Ensure ID is valid and fetch the product
         if (id) {
             fetchProduct(Number(id));
         }
@@ -52,7 +51,7 @@ function ProductDetails() {
         if (currentUserString) {
             const currentUser: UserType = JSON.parse(currentUserString);
             dispatch(addToBasket({ userId: currentUser.id, product, count })); 
-            toast.success(`${product.title} səbətə əlavə edildi`);
+            toast.success(`${product.title} added to basket!`);
             setCount(1);
         }
     };

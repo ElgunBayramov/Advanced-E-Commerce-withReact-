@@ -36,7 +36,7 @@ try {
   await dispatch(getAllProducts())
   }
 } catch (error) {
- toast.error("Xəta baş verdi")
+ toast.error("Failed to fetch products for the selected category.");
   
 }
 finally {
@@ -59,7 +59,7 @@ finally {
       {/* Category Heading */}
       <Typography 
         variant="h6" 
-        sx={{ textAlign: 'center', marginBottom: '16px', color: 'text.primary' }} // Adapts to theme text color
+        sx={{ textAlign: 'center', marginBottom: '16px', color: 'text.primary' }} 
       >
         All Categories
       </Typography>

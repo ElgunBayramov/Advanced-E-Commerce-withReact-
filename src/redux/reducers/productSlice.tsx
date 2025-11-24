@@ -39,7 +39,7 @@ export const productSlice = createSlice({
         state.products =action.payload;
       }),
       builder.addCase(getProductById.fulfilled, (state, action) => {
-        console.log("Product fetched:", action.payload); // Log the product fetched
+        console.log("Product fetched:", action.payload); 
         state.product = action.payload;
     })
 

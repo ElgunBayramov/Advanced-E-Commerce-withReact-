@@ -32,18 +32,18 @@ function Products() {
     sx={{
       display: 'flex',
       flexDirection: 'column',
-      minHeight: '100vh', // Ensure the container takes at least 100% of the viewport height
+      minHeight: '100vh', 
     }}
   >
     <Header />
 
     <Box
       sx={{
-        flex: '1', // Ensure this section takes up the remaining space
+        flex: '1',
         display: 'flex',
         flexDirection: {
-          xs: 'column', // Column for mobile/tablet
-          lg: 'row', // Row for larger than 1040px
+          xs: 'column', 
+          lg: 'row', 
         },
         justifyContent: 'center',
         padding: '20px',
